@@ -1,52 +1,60 @@
-import React, { Component, useEffect } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getInitalUsers } from './../duck/operations'
 import { GridList, GridListItem } from './../components/Styles'
 import UserItem from './../components/molecules/UserItem/UserItem'
-import { getInitalData } from './../reducers'
+import LoaderFull from '../components/molecules/Loader/LoaderFull'
 
 class Homepage extends Component {
   state = {
-    persons: []
+    loading: true
   }
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
-      console.log(res.data)
-      const persons = res.data
-      this.setState({
-        persons
-      })
+    const TIMEOUT_VAL = 500
+    this.props.getInitalUsers().then(() => {
+      setTimeout(() => {
+        this.setState({
+          loading: false
+        })
+      }, TIMEOUT_VAL)
     })
-    this.props.getInitalData()
   }
 
   render() {
+    console.log(this.props.userList)
+
     return (
       <div>
-        <GridList grid4>
-          {this.state.persons.map(
-            ({ id, name, username, email, phone, company, website }) => (
-              <GridListItem>
-                <UserItem
-                  id={id}
-                  name={name}
-                  username={username}
-                  email={email}
-                  phone={phone}
-                  company={company}
-                  website={website}
-                />
-              </GridListItem>
-            )
-          )}
-        </GridList>
+        {this.state.loading ? (
+          <LoaderFull loaderColor="#FFF" />
+        ) : (
+          <GridList grid4>
+            {this.props.userList.map(
+              ({ id, name, username, email, phone, company, website }) => (
+                <GridListItem>
+                  <UserItem
+                    id={id}
+                    name={name}
+                    username={username}
+                    email={email}
+                    phone={phone}
+                    company={company}
+                    website={website}
+                  />
+                </GridListItem>
+              )
+            )}
+          </GridList>
+        )}
       </div>
     )
   }
 }
-const mapStateToProps = ({ data = {} }) => ({
-  data
-})
+const mapStateToProps = state => {
+  return {
+    userList: state.users
+  }
+}
 
-export default connect(mapStateToProps, { getInitalData })(Homepage)
+export default connect(mapStateToProps, { getInitalUsers })(Homepage)

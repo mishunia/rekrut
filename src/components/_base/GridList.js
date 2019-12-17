@@ -11,25 +11,21 @@ const GridList = styled.ul`
   width: 100%;
   margin: 0 auto;
 
-  @media ${Media.tablet} {
-    margin-right: -10px;
-    margin-left: -10px;
-    width: calc(100% + 20px);
-  }
-
-  ${({ grid3 }) =>
-    grid3 &&
+  ${({ grid1 }) =>
+    grid1 &&
     css`
       justify-content: space-between;
 
       ${GridListItem} {
+        display: flex;
+        justify-content: center;
         width: 100%;
-        margin-bottom: ${({ theme }) => theme.gutter.xl};
+        margin-bottom: ${({ theme }) => theme.gutter.l};
       }
 
       @media ${Media.laptop} {
         ${GridListItem} {
-          width: calc(33% - 20px);
+          width: 100%;
           margin-bottom: 20px;
         }
       }
@@ -38,15 +34,19 @@ const GridList = styled.ul`
   ${({ grid4 }) =>
     grid4 &&
     css`
-      justify-content: space-between;
+      /* justify-content: space-between; */
 
       ${GridListItem} {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
       }
 
       @media ${Media.laptop} {
         ${GridListItem} {
-          width: calc(25% - 20px);
+          width: calc(25%);
+          padding: 10px;
         }
       }
     `};
@@ -54,7 +54,6 @@ const GridList = styled.ul`
 
 const GridListItem = styled.li`
   display: flex;
-  margin-bottom: 20px;
 `
 
 export { GridList, GridListItem }

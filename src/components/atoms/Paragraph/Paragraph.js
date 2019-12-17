@@ -7,6 +7,13 @@ const Paragraph = styled.p`
   line-height: ${props => props.theme.lineHeights.l};
   text-align: left;
 
+  /* transform */
+
+    ${({ upper }) =>
+      upper &&
+      css`
+        text-transform: uppercase;
+      `}
 
   /* align */
   ${({ center }) =>

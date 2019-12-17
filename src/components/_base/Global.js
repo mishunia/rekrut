@@ -55,6 +55,23 @@ html {
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  ::-webkit-scrollbar-track
+{
+    border: 1px solid #000;
+    background-color: #FFF;
+}
+
+::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #FFF;
+}
+
+::-webkit-scrollbar-thumb
+{
+	  background-color: #000;	
+}
   
 
 `

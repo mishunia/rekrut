@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Icon = styled.span`
+const IconWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,4 +12,4 @@ const Icon = styled.span`
     fill: currentColor;
   }
 `
-export default Icon
+export default IconWrapper

@@ -5,7 +5,7 @@ const theme = {
     modal: '500px'
   },
   colors: {
-    primary: '#FB3B64',
+    primary: '#000',
     secondary: '#08A6E4',
     tertiary: '#5BDDAF',
 
@@ -20,7 +20,7 @@ const theme = {
   },
 
   fonts: {
-    base: 'Poppins, sans-serif',
+    base: 'Roboto, sans-serif',
     alt: 'Raleway, sans-serif'
   },
 

@@ -4,26 +4,27 @@ const Button = styled.a`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-radius: ${({ theme }) => theme.gutter.l};
   font-size: ${({ theme }) => theme.fontSizes.s};
   font-weight: ${props => props.theme.fontWeights.medium};
   text-transform: uppercase;
+  border: 1px solid transparent;
 
   color: ${({ theme }) => theme.colors.white};
-  background-color: #FB3B64;
+  background-color: #000;
   padding: 12px 24px;
 
   height: 40px;
-  min-width: 136px;
+  min-width: 100%;
 
   outline: none;
-  border: none;
   cursor: pointer;
 
   transition: ${({ theme }) => theme.transitions.button};
 
   &:hover {
-    background-color: #08a6e4;
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
   }
   
   /* colors */
