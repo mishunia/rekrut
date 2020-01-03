@@ -10,6 +10,7 @@ const PostBarStyled = styled.div`
 const PostBarActionStyled = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   text-transform: uppercase;
+  cursor: pointer;
 `
 
 export { PostBarStyled, PostBarActionStyled }

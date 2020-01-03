@@ -9,9 +9,7 @@ const SpecialModalBackground = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 30;
-  /* opacity: 0.4; */
-  /* background-color: #000; */
-  background: green;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +18,7 @@ const SpecialModalBackground = styled.div`
 const ModalStyled = Modal.styled`
   display: flex;
   flex-direction: column;
-  width: 20rem;
-  height: 20rem;
-  display: flex;
+  width: 500px;
   background-color: ${props => props.theme.colors.white};
 `
 

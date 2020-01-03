@@ -15,10 +15,14 @@ import {
   getInitalUsers,
   getPostComments
 } from './../duck/operations'
+import ModalAddComment from './../components/organisms/Modal/components/ModalAddComment'
+import { SpecialModalBackground } from './../components/organisms/Modal/styles/index'
+import { ModalProvider } from 'styled-react-modal'
 
 class PostDetails extends Component {
   state = {
-    commentsVisible: false
+    commentsVisible: false,
+    showModal: false
   }
 
   componentDidMount() {
@@ -32,12 +36,14 @@ class PostDetails extends Component {
     })
   }
 
-  addCommentHandler = () => {
-    console.log('add')
+  toggleModalHandler = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    })
   }
 
   goBack = () => {
-    this.props.history.goBack()
+    console.log(this.props.history)
   }
 
   render() {
@@ -46,6 +52,17 @@ class PostDetails extends Component {
 
     return (
       <>
+        {item && (
+          <ModalProvider backgroundComponent={SpecialModalBackground}>
+            <ModalAddComment
+              isOpen={this.state.showModal}
+              onBackgroundClick={this.toggleModalHandler}
+              onEscapeKeydown={this.toggleModalHandler}
+              toggleModal={this.toggleModalHandler}
+              postId={item.id}
+            />
+          </ModalProvider>
+        )}
         {author && item && (
           <Header
             back={this.goBack}
@@ -55,7 +72,7 @@ class PostDetails extends Component {
         {item && <PostDetailsItem title={item.title} content={item.body} />}
         <PostBar
           toggleComment={this.toggleCommentHandler}
-          addComment={this.addCommentHandler}
+          addComment={this.toggleModalHandler}
           showTypo="+ show comments"
           hideTypo="- hide comments"
           togglerText={

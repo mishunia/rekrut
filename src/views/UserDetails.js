@@ -7,10 +7,9 @@ import { GridList, GridListItem } from './../components/Styles'
 import Header from './../components/organisms/Header/Header'
 import PostItem from './../components/molecules/PostItem/PostItem'
 import LoaderBox from '../components/molecules/Loader/LoaderBox'
-import FancyModalButton from './../components/organisms/Modal/Modal'
+import ModalAddPost from './../components/organisms/Modal/components/ModalAddPost'
 import { SpecialModalBackground } from './../components/organisms/Modal/styles/index'
 import { ModalProvider } from 'styled-react-modal'
-import FormAddPost from './../components/organisms/Forms/FormAddPost'
 
 class UserDetails extends Component {
   state = {
@@ -37,8 +36,7 @@ class UserDetails extends Component {
   }
 
   goBack = () => {
-    this.props.history.goBack()
-    console.log('chuaj')
+    this.props.history.push('/')
   }
 
   render() {
@@ -49,11 +47,12 @@ class UserDetails extends Component {
     return (
       <>
         <ModalProvider backgroundComponent={SpecialModalBackground}>
-          <FancyModalButton
+          <ModalAddPost
             isOpen={this.state.showModal}
             onBackgroundClick={this.toggleModalHandler}
             onEscapeKeydown={this.toggleModalHandler}
             toggleModal={this.toggleModalHandler}
+            userId={parseInt(this.props.match.params.id)}
           />
         </ModalProvider>
         {item && (
@@ -66,7 +65,7 @@ class UserDetails extends Component {
 
         <GridList grid1>
           {userPosts.map(el => (
-            <GridListItem>
+            <GridListItem key={el.id}>
               {this.state.loading ? (
                 <LoaderBox boxed loaderColor="#000" />
               ) : (
@@ -82,7 +81,6 @@ class UserDetails extends Component {
             </GridListItem>
           ))}
         </GridList>
-        <FormAddPost userId={parseInt(this.props.match.params.id)} />
       </>
     )
   }

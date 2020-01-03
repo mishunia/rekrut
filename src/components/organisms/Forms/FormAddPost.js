@@ -2,10 +2,18 @@ import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { addPost } from './../../../duck/actions'
 import Button from './../../atoms/Button/Button'
-import FormControlStyled from './../../molecules/FormControl/FormControl'
+import {
+  FormControlStyled,
+  FormControlInputStyled,
+  FormControlLabelStyled,
+  FormActionStyled,
+  FormActionItemStyled
+} from './styles/index'
+import Input from './../../atoms/Input/Input'
+import Label from './../../atoms/Label/Label'
 
 const FormAddPost = props => {
-  const titleInput = useRef('dupa')
+  const titleInput = useRef(null)
   const bodyInput = useRef(null)
 
   const submitHandler = e => {
@@ -27,14 +35,30 @@ const FormAddPost = props => {
 
   return (
     <form onSubmit={submitHandler}>
-      {/* <FormControlStyled label="title"></FormControlStyled>
-      <FormControlStyled label="body"></FormControlStyled> */}
-      <label>Title</label>
-      <input type="text" placeholder="name" ref={titleInput}></input>
-      <label>Body</label>
-      <textarea type="text" placeholder="body" ref={bodyInput}></textarea>
-      <Button>Cancel</Button>
-      <button type="submit">Add</button>
+      <FormControlStyled>
+        <FormControlLabelStyled>
+          <Label>Post title</Label>
+        </FormControlLabelStyled>
+        <FormControlInputStyled>
+          <Input type="text" placeholder="name" ref={titleInput} />
+        </FormControlInputStyled>
+      </FormControlStyled>
+      <FormControlStyled>
+        <FormControlLabelStyled>
+          <Label>Post body</Label>
+        </FormControlLabelStyled>
+        <FormControlInputStyled>
+          <Input textarea type="text" placeholder="body" ref={bodyInput} />
+        </FormControlInputStyled>
+      </FormControlStyled>
+      <FormActionStyled>
+        <FormActionItemStyled>
+          <Button type="submit">Add</Button>
+        </FormActionItemStyled>
+        <FormActionItemStyled>
+          <Button onClick={props.closeModal}>Cancel</Button>
+        </FormActionItemStyled>
+      </FormActionStyled>
     </form>
   )
 }

@@ -6,7 +6,7 @@ const LoaderBox = props => {
   return (
     <LoaderBoxContainerStyled loaderBg={props.loaderBg}>
       <Spinner
-        fadeIn="0"
+        fadeIn="none"
         name="ball-grid-pulse"
         loaderColor={props.loaderColor}
       />

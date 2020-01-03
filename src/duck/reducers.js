@@ -35,6 +35,11 @@ const rootReducer = (state = initState, action) => {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload)
       }
+    case types.ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
+      }
 
     default:
       return state
