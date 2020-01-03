@@ -18,19 +18,15 @@ const FormAddPost = props => {
 
   const submitHandler = e => {
     e.preventDefault()
-    console.log({ ...titleInput.current.value })
-    console.log(bodyInput.current.value)
 
-    const xd = {
+    const postItem = {
       userId: props.userId,
       id: Math.floor(Math.random() * 10 + 1) * 56,
       title: titleInput.current.value,
       body: bodyInput.current.value
     }
 
-    console.log(xd)
-
-    props.addPostItem(xd)
+    props.addPostItem(postItem)
   }
 
   return (

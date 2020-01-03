@@ -24,7 +24,7 @@ class PostDetails extends Component {
   state = {
     commentsVisible: false,
     showModal: false,
-    redirect: false
+    goPrevPage: false
   }
 
   componentDidMount() {
@@ -46,18 +46,15 @@ class PostDetails extends Component {
   }
 
   goBack = () => {
-    console.log(this.props.history)
-    this.setState({ redirect: true })
+    this.setState({ goPrevPage: true })
   }
 
   render() {
     const [item] = this.props.selectedPost
     const [author] = this.props.activeItem
-    const { redirect } = this.state
+    const { goPrevPage } = this.state
 
-    console.log(item)
-
-    if (redirect) {
+    if (goPrevPage) {
       return <Redirect to={`${routes.user}/${item.userId}`} />
     }
 
