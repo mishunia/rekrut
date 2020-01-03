@@ -7,13 +7,13 @@ import {
   CommentListStyled
 } from './../components/atoms/CommentList/CommentList'
 import PostDetailsItem from './../components/molecules/PostDetailsItem/PostDetailsItem'
-import PostBar from './../components/molecules/PostBar/PostBar'
-import CommentItem from './../components/molecules/CommentItem/CommentItem'
 import {
   getUserPosts,
   getInitalUsers,
   getPostComments
 } from './../duck/operations'
+import PostBar from './../components/organisms/PostBar/PostBar'
+import CommentItem from './../components/organisms/CommentItem/CommentItem'
 import ModalAddComment from './../components/organisms/Modal/components/ModalAddComment'
 import { SpecialModalBackground } from './../components/organisms/Modal/styles/index'
 import { ModalProvider } from 'styled-react-modal'

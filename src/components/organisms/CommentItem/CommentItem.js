@@ -4,7 +4,7 @@ import {
   CommentItemHeadStyled,
   CommentItemContentStyled
 } from './styles/index'
-import Paragraph from './../../atoms/Paragraph/Paragraph'
+import Paragraph from '../../atoms/Paragraph/Paragraph'
 
 const CommentItem = props => {
   return (

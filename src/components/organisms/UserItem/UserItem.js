@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import { routes } from './../../../routes/routes'
+import { routes } from '../../../routes/routes'
 import {
   UserItemStyled,
   UserItemHeadStyled,
   UserItemContactStyled,
   UserItemActionStyled
 } from './styles/index'
-import Paragraph from './../../atoms/Paragraph/Paragraph'
-import Button from './../../atoms/Button/Button'
+import Paragraph from '../../atoms/Paragraph/Paragraph'
+import Button from '../../atoms/Button/Button'
 class UserItem extends Component {
   state = {
     redirect: false
