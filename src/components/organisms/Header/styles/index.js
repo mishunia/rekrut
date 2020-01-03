@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
   padding: ${({ theme }) => theme.gutter.xl};
@@ -11,6 +12,11 @@ const HeaderStyled = styled.header`
 
 const HeaderBackStyled = styled.div`
   color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 const HeaderTitleStyled = styled.div`
@@ -20,6 +26,13 @@ const HeaderTitleStyled = styled.div`
 
 const HeaderActionStyled = styled.div`
   color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.gutter.s};
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.black};
+    background: ${({ theme }) => theme.colors.white};
+  }
 `
 
 export { HeaderStyled, HeaderBackStyled, HeaderTitleStyled, HeaderActionStyled }

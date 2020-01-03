@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { createPortal } from 'react-dom'
+import React from 'react'
 import {
   ModalStyled,
   ModalHeadStyled,
@@ -10,10 +9,9 @@ import {
   ModalContainerContentStyled
 } from './../styles/index'
 import Paragraph from './../../../atoms/Paragraph/Paragraph'
-
 import FormAddPost from './../../Forms/FormAddPost'
 
-export default function ModalAddPost(props) {
+const ModalAddPost = props => {
   return (
     <>
       <ModalStyled
@@ -41,3 +39,5 @@ export default function ModalAddPost(props) {
     </>
   )
 }
+
+export default ModalAddPost

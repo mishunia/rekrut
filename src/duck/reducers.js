@@ -1,11 +1,9 @@
 import types from './types'
-import { declaredPredicate } from '@babel/types'
 
 const initState = {
-  users: ['Michal'],
-  posts: ['Test Post'],
-  comments: ['post test'],
-  dupa: ['elo']
+  users: ['user1'],
+  posts: ['post1'],
+  comments: ['comment1']
 }
 
 const rootReducer = (state = initState, action) => {
@@ -40,7 +38,6 @@ const rootReducer = (state = initState, action) => {
         ...state,
         comments: [...state.comments, action.payload]
       }
-
     default:
       return state
   }

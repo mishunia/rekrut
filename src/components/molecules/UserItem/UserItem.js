@@ -5,13 +5,11 @@ import {
   UserItemStyled,
   UserItemHeadStyled,
   UserItemContactStyled,
-  UserItemInfoStyled,
   UserItemActionStyled
 } from './styles/index'
 import Paragraph from './../../atoms/Paragraph/Paragraph'
 import Button from './../../atoms/Button/Button'
-
-export default class UserItem extends Component {
+class UserItem extends Component {
   state = {
     redirect: false
   }
@@ -19,7 +17,7 @@ export default class UserItem extends Component {
   handleDetailsClick = () => this.setState({ redirect: true })
 
   render() {
-    const { id, name, email, phone, company, website } = this.props
+    const { id, name, email, phone, website } = this.props
     const { redirect } = this.state
 
     if (redirect) {
@@ -50,11 +48,6 @@ export default class UserItem extends Component {
             </a>
           </Paragraph>
         </UserItemContactStyled>
-        <UserItemInfoStyled>
-          {/* <Paragraph p3>{company.name}</Paragraph>
-          <Paragraph p3>{company.catchPhrase}</Paragraph>
-          <Paragraph p3>{company.bs}</Paragraph> */}
-        </UserItemInfoStyled>
         <UserItemActionStyled>
           <Button onClick={this.handleDetailsClick}>details</Button>
         </UserItemActionStyled>
@@ -62,3 +55,5 @@ export default class UserItem extends Component {
     )
   }
 }
+
+export default UserItem

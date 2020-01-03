@@ -24,13 +24,11 @@ class PostItem extends Component {
   }
 
   handleRemovePost = () => {
-    console.log('heh')
-    console.log(this.props.id)
     this.props.removePostItem(this.props.id)
   }
 
   render() {
-    const { id, userId, removePost, content, showPost, urlParam } = this.props
+    const { id, userId, content, showPost, urlParam } = this.props
 
     const { redirect } = this.state
 

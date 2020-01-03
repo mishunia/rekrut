@@ -22,8 +22,6 @@ class Homepage extends Component {
   }
 
   render() {
-    console.log(this.props.userList)
-
     return (
       <div>
         {this.state.loading ? (
@@ -32,7 +30,7 @@ class Homepage extends Component {
           <GridList grid4>
             {this.props.userList.map(
               ({ id, name, username, email, phone, company, website }) => (
-                <GridListItem>
+                <GridListItem key={id}>
                   <UserItem
                     id={id}
                     name={name}

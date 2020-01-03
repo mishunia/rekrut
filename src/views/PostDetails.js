@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import withContext from './../hoc/withContext'
 import Header from './../components/organisms/Header/Header'
 import {
   CommentListItemStyled,
@@ -30,6 +29,7 @@ class PostDetails extends Component {
     this.props.getUserPosts()
     this.props.getPostComments()
   }
+
   toggleCommentHandler = () => {
     this.setState({
       commentsVisible: !this.state.commentsVisible
@@ -52,38 +52,39 @@ class PostDetails extends Component {
 
     return (
       <>
-        {item && (
-          <ModalProvider backgroundComponent={SpecialModalBackground}>
-            <ModalAddComment
-              isOpen={this.state.showModal}
-              onBackgroundClick={this.toggleModalHandler}
-              onEscapeKeydown={this.toggleModalHandler}
-              toggleModal={this.toggleModalHandler}
-              postId={item.id}
+        {item && author && (
+          <>
+            <ModalProvider backgroundComponent={SpecialModalBackground}>
+              <ModalAddComment
+                isOpen={this.state.showModal}
+                onBackgroundClick={this.toggleModalHandler}
+                onEscapeKeydown={this.toggleModalHandler}
+                toggleModal={this.toggleModalHandler}
+                postId={item.id}
+              />
+            </ModalProvider>
+
+            <Header
+              back={this.goBack}
+              title={`${author.name} post #${item.id}`}
             />
-          </ModalProvider>
+
+            <PostDetailsItem title={item.title} content={item.body} />
+          </>
         )}
-        {author && item && (
-          <Header
-            back={this.goBack}
-            title={`${author.name} post #${item.id}`}
-          />
-        )}
-        {item && <PostDetailsItem title={item.title} content={item.body} />}
         <PostBar
           toggleComment={this.toggleCommentHandler}
           addComment={this.toggleModalHandler}
-          showTypo="+ show comments"
-          hideTypo="- hide comments"
+          actionTypo="add comment"
           togglerText={
-            !this.state.commentVisible ? 'Show comments' : 'Hide comments'
+            !this.state.commentsVisible ? 'Show comments +' : 'Hide comments -'
           }
         />
         {this.state.commentsVisible ? (
           <div>
             <CommentListStyled>
               {this.props.activeComments.map(el => (
-                <CommentListItemStyled>
+                <CommentListItemStyled key={el.id}>
                   <CommentItem name={el.name} email={el.email} body={el.body} />
                 </CommentListItemStyled>
               ))}
@@ -112,8 +113,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default withContext(
-  connect(mapStateToProps, { getUserPosts, getInitalUsers, getPostComments })(
-    withRouter(PostDetails)
-  )
-)
+export default connect(mapStateToProps, {
+  getUserPosts,
+  getInitalUsers,
+  getPostComments
+})(withRouter(PostDetails))

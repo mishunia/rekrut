@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
 import { receiveApiUsers, receiveApiPosts, receiveApiComments } from './actions'
 
 export function getInitalUsers() {

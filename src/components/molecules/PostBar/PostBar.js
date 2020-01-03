@@ -12,7 +12,7 @@ const PostBar = props => {
         {props.togglerText}
       </PostBarActionStyled>
       <PostBarActionStyled onClick={props.addComment}>
-        add comment
+        {props.actionTypo}
       </PostBarActionStyled>
     </PostBarStyled>
   )
