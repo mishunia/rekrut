@@ -2,7 +2,7 @@ import types from './types'
 
 const initState = {
   users: ['user1'],
-  posts: ['post1'],
+  posts: [{ userId: 999, id: 999, title: 'test' }],
   comments: ['comment1']
 }
 

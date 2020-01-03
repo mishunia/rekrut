@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { routes } from './../routes/routes'
 import Header from './../components/organisms/Header/Header'
 import {
   CommentListItemStyled,
@@ -21,7 +23,8 @@ import { ModalProvider } from 'styled-react-modal'
 class PostDetails extends Component {
   state = {
     commentsVisible: false,
-    showModal: false
+    showModal: false,
+    redirect: false
   }
 
   componentDidMount() {
@@ -44,11 +47,19 @@ class PostDetails extends Component {
 
   goBack = () => {
     console.log(this.props.history)
+    this.setState({ redirect: true })
   }
 
   render() {
     const [item] = this.props.selectedPost
     const [author] = this.props.activeItem
+    const { redirect } = this.state
+
+    console.log(item)
+
+    if (redirect) {
+      return <Redirect to={`${routes.user}/${item.userId}`} />
+    }
 
     return (
       <>
