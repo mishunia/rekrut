@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   ModalStyled,
   ModalHeadStyled,
@@ -11,7 +11,7 @@ import {
 import Paragraph from './../../../atoms/Paragraph/Paragraph'
 import FormAddComment from './../../Forms/FormAddComment'
 
-export default function ModalAddComment(props) {
+const ModalAddComment = props => {
   return (
     <>
       <ModalStyled
@@ -42,3 +42,5 @@ export default function ModalAddComment(props) {
     </>
   )
 }
+
+export default ModalAddComment

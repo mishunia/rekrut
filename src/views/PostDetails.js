@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import withContext from './../hoc/withContext'
+import { routes } from './../routes/routes'
 import Header from './../components/organisms/Header/Header'
 import {
   CommentListItemStyled,
   CommentListStyled
 } from './../components/atoms/CommentList/CommentList'
 import PostDetailsItem from './../components/molecules/PostDetailsItem/PostDetailsItem'
-import PostBar from './../components/molecules/PostBar/PostBar'
-import CommentItem from './../components/molecules/CommentItem/CommentItem'
 import {
   getUserPosts,
   getInitalUsers,
   getPostComments
 } from './../duck/operations'
+import PostBar from './../components/organisms/PostBar/PostBar'
+import CommentItem from './../components/organisms/CommentItem/CommentItem'
 import ModalAddComment from './../components/organisms/Modal/components/ModalAddComment'
 import { SpecialModalBackground } from './../components/organisms/Modal/styles/index'
 import { ModalProvider } from 'styled-react-modal'
@@ -22,7 +23,8 @@ import { ModalProvider } from 'styled-react-modal'
 class PostDetails extends Component {
   state = {
     commentsVisible: false,
-    showModal: false
+    showModal: false,
+    redirect: false
   }
 
   componentDidMount() {
@@ -30,6 +32,7 @@ class PostDetails extends Component {
     this.props.getUserPosts()
     this.props.getPostComments()
   }
+
   toggleCommentHandler = () => {
     this.setState({
       commentsVisible: !this.state.commentsVisible
@@ -44,46 +47,55 @@ class PostDetails extends Component {
 
   goBack = () => {
     console.log(this.props.history)
+    this.setState({ redirect: true })
   }
 
   render() {
     const [item] = this.props.selectedPost
     const [author] = this.props.activeItem
+    const { redirect } = this.state
+
+    console.log(item)
+
+    if (redirect) {
+      return <Redirect to={`${routes.user}/${item.userId}`} />
+    }
 
     return (
       <>
-        {item && (
-          <ModalProvider backgroundComponent={SpecialModalBackground}>
-            <ModalAddComment
-              isOpen={this.state.showModal}
-              onBackgroundClick={this.toggleModalHandler}
-              onEscapeKeydown={this.toggleModalHandler}
-              toggleModal={this.toggleModalHandler}
-              postId={item.id}
+        {item && author && (
+          <>
+            <ModalProvider backgroundComponent={SpecialModalBackground}>
+              <ModalAddComment
+                isOpen={this.state.showModal}
+                onBackgroundClick={this.toggleModalHandler}
+                onEscapeKeydown={this.toggleModalHandler}
+                toggleModal={this.toggleModalHandler}
+                postId={item.id}
+              />
+            </ModalProvider>
+
+            <Header
+              back={this.goBack}
+              title={`${author.name} post #${item.id}`}
             />
-          </ModalProvider>
+
+            <PostDetailsItem title={item.title} content={item.body} />
+          </>
         )}
-        {author && item && (
-          <Header
-            back={this.goBack}
-            title={`${author.name} post #${item.id}`}
-          />
-        )}
-        {item && <PostDetailsItem title={item.title} content={item.body} />}
         <PostBar
           toggleComment={this.toggleCommentHandler}
           addComment={this.toggleModalHandler}
-          showTypo="+ show comments"
-          hideTypo="- hide comments"
+          actionTypo="add comment"
           togglerText={
-            !this.state.commentVisible ? 'Show comments' : 'Hide comments'
+            !this.state.commentsVisible ? 'Show comments +' : 'Hide comments -'
           }
         />
         {this.state.commentsVisible ? (
           <div>
             <CommentListStyled>
               {this.props.activeComments.map(el => (
-                <CommentListItemStyled>
+                <CommentListItemStyled key={el.id}>
                   <CommentItem name={el.name} email={el.email} body={el.body} />
                 </CommentListItemStyled>
               ))}
@@ -112,8 +124,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default withContext(
-  connect(mapStateToProps, { getUserPosts, getInitalUsers, getPostComments })(
-    withRouter(PostDetails)
-  )
-)
+export default connect(mapStateToProps, {
+  getUserPosts,
+  getInitalUsers,
+  getPostComments
+})(withRouter(PostDetails))

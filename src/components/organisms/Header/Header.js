@@ -6,12 +6,20 @@ import {
   HeaderActionStyled
 } from './styles'
 
-export default function Header(props) {
+const Header = props => {
   return (
     <HeaderStyled>
       <HeaderBackStyled onClick={props.back}>Back</HeaderBackStyled>
       <HeaderTitleStyled>{props.title}</HeaderTitleStyled>
-      <HeaderActionStyled onClick={props.action}>add</HeaderActionStyled>
+      <div>
+        {props.action ? (
+          <HeaderActionStyled onClick={props.action}>add</HeaderActionStyled>
+        ) : (
+          ''
+        )}
+      </div>
     </HeaderStyled>
   )
 }
+
+export default Header

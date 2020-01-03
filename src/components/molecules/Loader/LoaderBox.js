@@ -5,11 +5,7 @@ import { LoaderBoxContainerStyled } from './styles'
 const LoaderBox = props => {
   return (
     <LoaderBoxContainerStyled loaderBg={props.loaderBg}>
-      <Spinner
-        fadeIn="none"
-        name="ball-grid-pulse"
-        loaderColor={props.loaderColor}
-      />
+      <Spinner fadeIn="none" name="ball-grid-pulse" />
     </LoaderBoxContainerStyled>
   )
 }

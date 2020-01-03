@@ -4,8 +4,7 @@ import {
   CommentItemHeadStyled,
   CommentItemContentStyled
 } from './styles/index'
-
-import Paragraph from './../../atoms/Paragraph/Paragraph'
+import Paragraph from '../../atoms/Paragraph/Paragraph'
 
 const CommentItem = props => {
   return (
@@ -15,7 +14,7 @@ const CommentItem = props => {
           <strong>{props.name}</strong>
         </Paragraph>
         <Paragraph>
-          <a href="#">{props.email}</a>
+          <a href={`mailto:${props.email}`}>{props.email}</a>
         </Paragraph>
       </CommentItemHeadStyled>
       <CommentItemContentStyled>

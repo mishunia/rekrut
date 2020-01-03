@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import withContext from './../hoc/withContext'
 import { getUserPosts, getInitalUsers } from './../duck/operations'
 import { GridList, GridListItem } from './../components/Styles'
 import Header from './../components/organisms/Header/Header'
-import PostItem from './../components/molecules/PostItem/PostItem'
 import LoaderBox from '../components/molecules/Loader/LoaderBox'
+import PostItem from './../components/organisms/PostItem/PostItem'
 import ModalAddPost from './../components/organisms/Modal/components/ModalAddPost'
 import { SpecialModalBackground } from './../components/organisms/Modal/styles/index'
 import { ModalProvider } from 'styled-react-modal'
@@ -42,7 +41,6 @@ class UserDetails extends Component {
   render() {
     const { userPosts } = this.props
     const [item] = this.props.activeItem
-    const [post] = this.props.userPosts
 
     return (
       <>
@@ -62,7 +60,6 @@ class UserDetails extends Component {
             title={`${item.name} posts`}
           />
         )}
-
         <GridList grid1>
           {userPosts.map(el => (
             <GridListItem key={el.id}>
@@ -98,13 +95,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   // const deletePost = post => dispatch(removePost(post))
-//   // return deletePost
-// }
-
-export default withContext(
-  connect(mapStateToProps, { getUserPosts, getInitalUsers })(
-    withRouter(UserDetails)
-  )
+export default connect(mapStateToProps, { getUserPosts, getInitalUsers })(
+  withRouter(UserDetails)
 )

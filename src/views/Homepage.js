@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getInitalUsers } from './../duck/operations'
 import { GridList, GridListItem } from './../components/Styles'
-import UserItem from './../components/molecules/UserItem/UserItem'
 import LoaderFull from '../components/molecules/Loader/LoaderFull'
+import UserItem from './../components/organisms/UserItem/UserItem'
 
 class Homepage extends Component {
   state = {
@@ -22,8 +22,6 @@ class Homepage extends Component {
   }
 
   render() {
-    console.log(this.props.userList)
-
     return (
       <div>
         {this.state.loading ? (
@@ -32,7 +30,7 @@ class Homepage extends Component {
           <GridList grid4>
             {this.props.userList.map(
               ({ id, name, username, email, phone, company, website }) => (
-                <GridListItem>
+                <GridListItem key={id}>
                   <UserItem
                     id={id}
                     name={name}
